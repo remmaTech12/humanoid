@@ -218,8 +218,8 @@ def main():
     runner.load(checkpoint, load_optimizer=False)
     runner.current_learning_iteration = 0
 
-    dump_yaml(output_dir / "params" / "env.yaml", env_cfg)
-    dump_yaml(output_dir / "params" / "agent.yaml", agent_cfg)
+    dump_yaml(str(output_dir / "params" / "env.yaml"), env_cfg)
+    dump_yaml(str(output_dir / "params" / "agent.yaml"), agent_cfg)
 
     runner.learn(
         num_learning_iterations=agent_cfg.max_iterations,
