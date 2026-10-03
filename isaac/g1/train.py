@@ -15,7 +15,7 @@ from pathlib import Path
 from isaaclab.app import AppLauncher
 
 TASK_NAME = "Isaac-Velocity-Flat-G1-v0"
-DEFAULT_POLICY_NAME = "backward"
+DEFAULT_POLICY_NAME = "locomotion"
 
 
 def _range_pair(values: list[float], name: str) -> tuple[float, float]:
