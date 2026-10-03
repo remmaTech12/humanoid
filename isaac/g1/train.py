@@ -51,7 +51,7 @@ parser.add_argument(
     type=float,
     nargs=2,
     metavar=("MIN", "MAX"),
-    default=[-0.4, -0.1],
+    default=[-1.0, 1.0],
     help="Command range for forward/backward velocity in m/s.",
 )
 parser.add_argument(
@@ -59,7 +59,7 @@ parser.add_argument(
     type=float,
     nargs=2,
     metavar=("MIN", "MAX"),
-    default=[0.0, 0.0],
+    default=[-1.0, 1.0],
     help="Command range for lateral velocity in m/s.",
 )
 parser.add_argument(
@@ -67,7 +67,7 @@ parser.add_argument(
     type=float,
     nargs=2,
     metavar=("MIN", "MAX"),
-    default=[0.0, 0.0],
+    default=[-1.0, 1.0],
     help="Command range for yaw rate in rad/s.",
 )
 parser.add_argument(
