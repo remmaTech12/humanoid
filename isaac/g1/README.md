@@ -123,14 +123,7 @@ python isaac/g1/train_backward.py \
 ```
 
 The checkpoint shown above is the same published pretrained
-`Isaac-Velocity-Flat-G1-v0` policy used by `keyboard.py` by default. The
-`--checkpoint` option can also point to any compatible RSL-RL checkpoint:
-
-```bash
-python isaac/g1/train_backward.py \
-  --checkpoint ~/path/to/checkpoint.pt \
-  --policy-name backward
-```
+`Isaac-Velocity-Flat-G1-v0` policy used by `keyboard.py` by default.
 
 The initial policy weights are loaded from the checkpoint, but the optimizer is
 started fresh so that `--learning-rate` is applied exactly as requested.
