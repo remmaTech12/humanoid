@@ -90,10 +90,11 @@ This keeps the upstream Isaac Lab repository untouched while allowing experiment
 to live in a separate project repository.
 
 
-## Backward-walking fine-tuning
+## Policy fine-tuning
 
-`train_backward.py` fine-tunes the published pretrained G1 Flat RSL-RL policy
-instead of starting from random weights.
+`train.py` fine-tunes the published pretrained G1 Flat RSL-RL policy
+instead of starting from random weights. Velocity command ranges are configurable,
+so the script is not limited to backward walking.
 
 It keeps the Isaac Lab task fixed to:
 
@@ -111,7 +112,7 @@ From this repository, with the Isaac Lab virtual environment activated:
 ```bash
 source ~/lab/IsaacLab/.venv/bin/activate
 
-python isaac/g1/train_backward.py \
+python isaac/g1/train.py \
   --checkpoint ~/lab/IsaacLab/.pretrained_checkpoints/rsl_rl/Isaac-Velocity-Flat-G1-v0/checkpoint.pt \
   --policy-name backward \
   --vx -0.4 -0.1 \
