@@ -88,3 +88,65 @@ G1 joint actions
 
 This keeps the upstream Isaac Lab repository untouched while allowing experiments
 to live in a separate project repository.
+
+
+## Policy fine-tuning
+
+`train.py` fine-tunes the published pretrained G1 Flat RSL-RL policy
+instead of starting from random weights. Velocity command ranges are configurable,
+so the script is not limited to backward walking.
+
+It keeps the Isaac Lab task fixed to:
+
+```text
+Isaac-Velocity-Flat-G1-v0
+```
+
+The velocity command ranges, PPO learning rate, initial checkpoint, and output
+policy name can be selected from the command line.
+
+### Quick smoke test
+
+From this repository, with the Isaac Lab virtual environment activated:
+
+```bash
+source ~/lab/IsaacLab/.venv/bin/activate
+
+python isaac/g1/train.py \
+  --checkpoint ~/lab/IsaacLab/.pretrained_checkpoints/rsl_rl/Isaac-Velocity-Flat-G1-v0/checkpoint.pt \
+  --policy-name backward \
+  --vx -0.4 -0.1 \
+  --vy 0.0 0.0 \
+  --wz 0.0 0.0 \
+  --learning-rate 1e-3 \
+  --num-envs 64 \
+  --max-iterations 50
+```
+
+The checkpoint shown above is the same published pretrained
+`Isaac-Velocity-Flat-G1-v0` policy used by `keyboard.py` by default.
+
+The initial policy weights are loaded from the checkpoint, but the optimizer is
+started fresh so that `--learning-rate` is applied exactly as requested.
+
+### Output
+
+A run is stored under:
+
+```text
+isaac/g1/policies/<policy-name>/<timestamp>/
+```
+
+For example:
+
+```text
+isaac/g1/policies/backward/2026-10-03_17-30-00/
+├── model_0.pt
+├── model_49.pt
+├── params/
+│   ├── agent.yaml
+│   └── env.yaml
+└── events.out.tfevents...
+```
+
+The `policies` directory is ignored by Git because checkpoints can be large.
