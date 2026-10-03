@@ -16,6 +16,12 @@ parser.add_argument(
     default="Isaac-Velocity-Flat-G1-v0",
     help="Isaac Lab task name.",
 )
+parser.add_argument(
+    "--checkpoint",
+    type=str,
+    default=None,
+    help="Path to an RSL-RL checkpoint.",
+)
 parser.add_argument("--num_envs", type=int, default=1, help="Number of environments to simulate.")
 parser.add_argument("--vx", type=float, default=0.8, help="Forward/backward velocity sensitivity.")
 parser.add_argument("--vy", type=float, default=0.4, help="Lateral velocity sensitivity.")
@@ -57,11 +63,14 @@ def main():
     env_cfg.seed = agent_cfg.seed
     env_cfg.sim.device = device
 
-    checkpoint = get_published_pretrained_checkpoint("rsl_rl", train_task_name)
-    if not checkpoint:
-        raise RuntimeError(
-            f"No published pretrained RSL-RL checkpoint is available for {train_task_name}."
-        )
+    if args_cli.checkpoint is not None:
+        checkpoint = args_cli.checkpoint
+    else:
+        checkpoint = get_published_pretrained_checkpoint("rsl_rl", train_task_name)
+        if not checkpoint:
+            raise RuntimeError(
+                f"No published pretrained RSL-RL checkpoint is available for {train_task_name}."
+            )
 
     env = gym.make(args_cli.task, cfg=env_cfg)
     env = RslRlVecEnvWrapper(env, clip_actions=agent_cfg.clip_actions)
