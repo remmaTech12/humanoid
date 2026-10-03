@@ -112,6 +112,7 @@ From this repository, with the Isaac Lab virtual environment activated:
 source ~/lab/IsaacLab/.venv/bin/activate
 
 python isaac/g1/train_backward.py \
+  --checkpoint ~/lab/IsaacLab/.pretrained_checkpoints/rsl_rl/Isaac-Velocity-Flat-G1-v0/checkpoint.pt \
   --policy-name backward \
   --vx -0.4 -0.1 \
   --vy 0.0 0.0 \
@@ -121,8 +122,9 @@ python isaac/g1/train_backward.py \
   --max-iterations 50
 ```
 
-By default, the script uses Isaac Lab's published pretrained checkpoint for
-`Isaac-Velocity-Flat-G1-v0`. To start from a specific checkpoint instead:
+The checkpoint shown above is the same published pretrained
+`Isaac-Velocity-Flat-G1-v0` policy used by `keyboard.py` by default. The
+`--checkpoint` option can also point to any compatible RSL-RL checkpoint:
 
 ```bash
 python isaac/g1/train_backward.py \
