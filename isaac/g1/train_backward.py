@@ -171,6 +171,9 @@ def main():
     env_cfg.commands.base_velocity.ranges.lin_vel_x = vx
     env_cfg.commands.base_velocity.ranges.lin_vel_y = vy
     env_cfg.commands.base_velocity.ranges.ang_vel_z = wz
+    # G1 Flat normally uses heading targets to generate yaw commands. Disable
+    # that mode so the explicit --wz range above is actually used.
+    env_cfg.commands.base_velocity.heading_command = False
 
     # Fine-tuning parameters.
     agent_cfg.algorithm.learning_rate = args_cli.learning_rate
